@@ -1,16 +1,33 @@
-include mixins/navbar
+extends layout
 
-html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    meta(http-equiv="X-UA-Compatible", content="ie=edge")
-    title Wireless 4 U
-    link(rel="stylesheet", href="/css/bootstrap.min.css")
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js')
-    script(src="/js/bootstrap.min.js")
-
-  block content
-  body.bg-light
-    div.contatiner-fluid
-      +navbar()
+block content
+  div.col-md-8.mx-auto
+    img.img-fluid(src="img/companyLogo.png", alt="Wireless4U Logo")
+    br
+    br
+    #indexCarousel.carousel.slide(data-ride='carousel')
+      .carousel-inner
+        .carousel-item.active
+          .card.bg-secondary
+            .card-body.mx-auto
+              h5.card-title Services
+              ul.card-text
+                li Screen Repair
+                li Battery Replacement
+                li Phone Activation
+        .carousel-item
+          .card.bg-secondary
+            .card-body.mx-auto
+              h5.card-title Phones
+              .card-text
+                h6 Time for a new phone? Check out our inventory <a href="/phones">here<a>!
+        .carousel-item
+          .card.bg-secondary
+            .card-body.mx-auto
+              h5.card-title Accessories
+      a.carousel-control-prev(href='#indexCarousel' role='button' data-slide='prev')
+        span.carousel-control-prev-icon(aria-hidden='true')
+        span.sr-only Previous
+      a.carousel-control-next(href='#indexCarousel' role='button' data-slide='next')
+        span.carousel-control-next-icon(aria-hidden='true')
+        span.sr-only Next

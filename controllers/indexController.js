@@ -7,12 +7,4 @@ router.get('/', function (req, res, next) {
   res.render("index");
 });
 
-router.get('/register', function (req, res, next) {
-  res.send("Register");
-});
-
-router.get('/login', function (req, res, next) {
-  res.send("Login");
-});
-
 module.exports = router;

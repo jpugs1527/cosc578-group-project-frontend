@@ -5,12 +5,16 @@ mixin navbar()
       span.navbar-toggler-icon
     #navbarSupportedContent.collapse.navbar-collapse
       ul.navbar-nav.ml-auto
-        li.nav-item.active
+        li.nav-item
           a.nav-link(href='/')
             | Home 
             span.sr-only (current)
         li.nav-item
+          a.nav-link(href='/services') Services
+        li.nav-item
           a.nav-link(href='/phones') Phones
+        li.nav-item
+          a.nav-link(href='/accessories') Accessories
         li.nav-item.dropdown
           a#navbarDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
             | Account

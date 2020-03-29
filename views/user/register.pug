@@ -1,2 +1,24 @@
-extends ../index
+extends ../layout
+
+block content
+  div.col-md-6.mx-auto
+    form(action="/user/register", method="post")
+      .form-group
+        label(for='firstName') First Name
+        input.form-control(type='text' placeholder='First Name')
+      .form-group
+        label(for='lastName') Last Name
+        input.form-control(type='text' placeholder='Last Name')
+      .form-group
+        label(for='email') Email address
+        input.form-control(type='email' aria-describedby='emailHelp' placeholder='Enter email')
+        small.form-text.text-muted We&apos;ll never share your email with anyone else.
+      .form-group
+        label(for='password') Password
+        input.form-control(type='password' placeholder='Password')
+      .form-group
+        label(for='confirmPassword') Confirm Password
+        input.form-control(type='password' placeholder='Confirm Password')
+      button.btn.btn-primary(type='submit') Submit
+
 
