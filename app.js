@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -23,6 +24,5 @@ app.use('/user', userController);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Our app is running on port ${ PORT }`);
+    console.log(`App is running at localhost:${ PORT }`);
 });
-console.log("App is running at localhost:3000");

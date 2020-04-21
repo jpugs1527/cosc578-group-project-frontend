@@ -4,21 +4,24 @@ block content
   div.col-md-6.mx-auto
     form(action="/user/register", method="post")
       .form-group
+        label(for='username') Username
+        input.form-control(type='text' name='username' placeholder='Username')
+      .form-group
         label(for='firstName') First Name
-        input.form-control(type='text' placeholder='First Name')
+        input.form-control(type='text' name='firstName' placeholder='First Name')
       .form-group
         label(for='lastName') Last Name
-        input.form-control(type='text' placeholder='Last Name')
+        input.form-control(type='text' name='lastName' placeholder='Last Name')
       .form-group
         label(for='email') Email address
-        input.form-control(type='email' aria-describedby='emailHelp' placeholder='Enter email')
+        input.form-control(type='email' name='email' aria-describedby='emailHelp' placeholder='Enter email')
         small.form-text.text-muted We&apos;ll never share your email with anyone else.
       .form-group
         label(for='password') Password
-        input.form-control(type='password' placeholder='Password')
+        input.form-control(type='password' name='password' placeholder='Password')
       .form-group
         label(for='confirmPassword') Confirm Password
-        input.form-control(type='password' placeholder='Confirm Password')
+        input.form-control(type='password' name='confirmPassword' placeholder='Confirm Password')
       button.btn.btn-primary(type='submit') Submit
 
 
