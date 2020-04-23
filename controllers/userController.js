@@ -19,6 +19,7 @@ router.post('/register', function (req, res, next) {
   axios.post(api + '/Account/Registration', { usrObj })
     .then(function (response) {
       console.log(response.data);
+      req.flash('success', '')
       res.redirect('/user/login');
     })
     .catch(function (error) {
