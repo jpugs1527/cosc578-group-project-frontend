@@ -2,6 +2,16 @@ extends ../layout
 
 block content
   div.col-md-6.mx-auto
+    if error && error.length > 0
+      .alert.alert-danger.alert-dismissible.fade-in(role="alert")
+        button.close(type="button" data-dismiss="alert" aria-label="Close")
+          span(aria-hidden="true") ×
+        p= error
+    if success && success.length > 0
+      .alert.alert-success.alert-dismissible.fade-in(role="alert")
+        button.close(type="button" data-dismiss="alert" aria-label="Close")
+          span(aria-hidden="true") ×
+        p= success
     h5 Login
     form(action="/user/login", method="post")
       .form-group

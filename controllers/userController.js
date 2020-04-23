@@ -19,11 +19,12 @@ router.post('/register', function (req, res, next) {
   axios.post(api + '/Account/Registration', { usrObj })
     .then(function (response) {
       console.log(response.data);
-      req.flash('success', '')
+      req.flash('success', 'Account created.  Please login to continue.');
       res.redirect('/user/login');
     })
     .catch(function (error) {
       console.log(error);
+      req.flash('error', 'Oops something went wrong... Try again later');
       res.redirect('/user/register');
     });
 });

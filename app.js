@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const session = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
@@ -9,16 +10,23 @@ const flash = require('connect-flash');
 const indexController = require('./controllers/indexController');
 const userController = require('./controllers/userController');
 
-app.use(express.static(path.join(__dirname, 'public')));
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+    cookie: { maxAge: 60000 }, 
+    secret: 'woot',
+    resave: false, 
+    saveUninitialized: false
+    })
+);
 
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
-
 app.use(flash());
 app.use(function(req, res, next){
     res.locals.success = req.flash('success');
