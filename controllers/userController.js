@@ -57,7 +57,7 @@ router.post('/login', function (req, res, next) {
     })
     .then(response => {
       console.log(response.data);
-      res.cookie('user', usrObj.username, {
+      res.cookie('user', response.data, {
         maxAge: 60000
       });
       res.redirect('/');
