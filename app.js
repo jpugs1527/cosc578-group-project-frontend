@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
@@ -15,18 +16,33 @@ app.set('view engine', 'pug');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Express session
 app.use(session({
-    cookie: { maxAge: 60000 }, 
-    secret: 'woot',
+    key: 'user_sid',
+    secret: 'secret',
     resave: false, 
-    saveUninitialized: false
-    })
-);
+    saveUninitialized: false,
+    cookie: { maxAge: 60000 }
+}));
 
+// Used to deal with cookies from the browser
+app.use(cookieParser());
+
+// Clear cookie session for logged in user
+app.use((req, res, next) => {
+    if (req.cookies.user_sid && !req.session.user) {
+        res.clearCookie('user_sid'); 
+    }
+    next();
+});
+
+// Used to parse data from form for requests
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
+
+// Used to send app level alerts
 app.use(flash());
 app.use(function(req, res, next){
     res.locals.success = req.flash('success');
