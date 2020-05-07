@@ -15,12 +15,19 @@ mixin navbar()
           a.nav-link(href='/phones') Phones
         li.nav-item
           a.nav-link(href='/accessories') Accessories
-        li.nav-item.dropdown
-          a#navbarDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
-            | Account
-          .dropdown-menu(aria-labelledby='navbarDropdown')
-            a.dropdown-item(href='/user/register') Register
-            a.dropdown-item(href='/user/login') Employee Login
-      form.form-inline.my-2.my-lg-0
-        input.form-control.mr-sm-2(type='search' placeholder='Search' aria-label='Search')
-        button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+        if !data
+          li.nav-item.dropdown
+            a#navbarDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+              | Account
+            .dropdown-menu(aria-labelledby='navbarDropdown')
+              a.dropdown-item(href='/user/register') Register
+              a.dropdown-item(href='/user/login') Login
+        else 
+          li.nav-item.dropdown
+            a#navbarDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+              | Hi #{data.unique_name}
+            .dropdown-menu(aria-labelledby='navbarDropdown')
+              a.dropdown-item(href='/user/logout') Logout
+      //- form.form-inline.my-2.my-lg-0
+      //-   input.form-control.mr-sm-2(type='search' placeholder='Search' aria-label='Search')
+      //-   button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search

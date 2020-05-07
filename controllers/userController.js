@@ -3,6 +3,7 @@ const axios = require("axios");
 const router = express.Router();
 require('dotenv').config();
 const api = process.env.SERVER_ADDRESS;
+const jwtDecode = require('jwt-decode');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -17,7 +18,7 @@ router.get('/register', function (req, res, next) {
 // Handle creating new account
 router.post('/register', function (req, res, next) {
   var usrObj = req.body;
-
+  console.log(usrObj);
   axios({
       url: api + '/Account/Registration',
       method: "POST",
@@ -60,12 +61,12 @@ router.post('/login', function (req, res, next) {
       res.cookie('user', response.data, {
         maxAge: 60000
       });
-      res.redirect('/');
+      res.render('index', { data: jwtDecode(response.data) });
     })
     .catch(error => {
       console.log(error);
       req.flash('error', 'Username or password incorrect.  Try again.');
-      res.redirect('/user/login');
+      res.render('user/login');
     });
 });
 

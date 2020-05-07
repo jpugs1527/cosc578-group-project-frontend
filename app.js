@@ -1,15 +1,16 @@
 require('dotenv').config();
 const express = require('express');
+const path = require('path');
+const app = express();
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const path = require('path');
-const app = express();
 const flash = require('connect-flash');
 
 // Tell app.js where to get the user routes
 const indexController = require('./controllers/indexController');
 const userController = require('./controllers/userController');
+const accessoryController = require('./controllers/accessoriesController');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -52,7 +53,7 @@ app.use(function(req, res, next){
 
 app.use('/', indexController);
 app.use('/user', userController);
-
+app.use('/accessories', accessoryController);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
