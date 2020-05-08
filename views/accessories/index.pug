@@ -1,0 +1,53 @@
+extends ../layout
+
+block content
+    .container(class="col-md-8")
+        table.table
+            thead
+            tr
+                th(scope='col') Name
+                th(scope='col') Description
+                th(scope='col') Serial Number
+                th(scope='col') Retail Price
+                th(scope='col') Manufacturer ID
+                th(scope='col')
+            tbody
+            each val, index in data
+                tr
+                    td=val.Name
+                    td=val.Description
+                    td=val.SerialNumber
+                    td=val.RetailPrice
+                    td=val.ItemManufacturerId
+                    td 
+                        form(action='/delete', method='post')
+                            button(class='btn btn-danger' type='submit', name='id', value=val.Id) X
+        button.btn.btn-primary.float-right(type='button', data-toggle='modal', data-target='#accessoryModal')
+            | Add
+        #accessoryModal.modal.fade(tabindex='-1', role='dialog', aria-hidden='true')
+            .modal-dialog(role='document')
+                .modal-content
+                    .modal-header
+                        h5.modal-title Add Accessory
+                        button.close(type='button', data-dismiss='modal', aria-label='Close') 
+                        span(aria-hidden='true') &times;
+                    .modal-body
+                        form(action="/accessories/add", method="post")
+                            .form-group
+                                label(for='name') Name
+                                input.form-control(type='text' name='name' placeholder='Name')
+                            .form-group
+                                label(for='description') Description
+                                input.form-control(type='text' name='description' placeholder='Description')
+                            .form-group
+                                label(for='serialNumber') Serial Number
+                                input.form-control(type='number' name='serialNumber' placeholder='Serial Number')
+                            .form-group
+                                label(for='retailPrice') Retail Price
+                                input.form-control(type='number' step=".01" name='retailPrice' placeholder='Retail Price')
+                            .form-group
+                                label(for='itemManufacturerId') Manufacturer ID
+                                input.form-control(type='number' name='itemManufacturerId' placeholder='Manufacturer ID')
+                            button.btn.btn-primary.float-right(type='submit') Submit
+
+                
