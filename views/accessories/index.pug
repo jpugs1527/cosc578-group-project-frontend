@@ -17,10 +17,12 @@ block content
                     td=val.Name
                     td=val.Description
                     td=val.SerialNumber
-                    td=val.RetailPrice
+                    td="$" + val.RetailPrice
                     td=val.ItemManufacturerId
                     td 
-                        form(action='/delete', method='post')
+                        //- form(action='/accessories/delete', method='post')
+                        //-     button(class='btn btn-danger' type='submit', name='id', value=val.Id) 
+                        form(action='/accessories/delete', method='post')
                             button(class='btn btn-danger' type='submit', name='id', value=val.Id) X
         button.btn.btn-primary.float-right(type='button', data-toggle='modal', data-target='#accessoryModal')
             | Add
