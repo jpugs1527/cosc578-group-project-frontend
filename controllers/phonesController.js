@@ -44,4 +44,25 @@ router.post('/add', function (req, res, next) {
   });
 });
 
+// Delete an accessory
+router.post('/delete', function (req, res, next) {
+  axios({
+    url: api + '/Inventory/DeleteDevice',
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    }, 
+    params: {
+      id: req.body.id
+    }
+  })
+  .then(response => {
+    console.log(response.data);
+    res.redirect('/phones');
+  })
+  .catch(error => {
+    console.log(error);
+  });
+});
+
 module.exports = router;
