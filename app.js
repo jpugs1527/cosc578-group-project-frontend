@@ -12,6 +12,7 @@ const jwtDecode = require('jwt-decode');
 const indexController = require('./controllers/indexController');
 const userController = require('./controllers/userController');
 const accessoryController = require('./controllers/accessoriesController');
+const phonesController = require('./controllers/phonesController');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -65,6 +66,7 @@ app.use(function(req, res, next){
 app.use('/', indexController);
 app.use('/user', userController);
 app.use('/accessories', accessoryController);
+app.use('/phones', phonesController);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

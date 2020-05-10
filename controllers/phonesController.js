@@ -6,62 +6,38 @@ const api = process.env.SERVER_ADDRESS;
 /* GET index page. */
 router.get('/', function (req, res, next) {
   axios({
-    url: api + '/Inventory/GetAccessories',
+    url: api + '/Inventory/GetDevices',
     method: "GET",
     headers: {
       "Content-Type": "application/json"
     }, 
   })
   .then(response => {
-    res.render('accessories/index', { data: response.data });
+    res.render('phones/index', { data: response.data });
   })
   .catch(error => {
     console.log(error);
   });
 });
 
-// Add a new accessory
+// Add a new device
 router.post('/add', function (req, res, next) {
   axios({
-    url: api + '/Inventory/AddAccessory',
+    url: api + '/Inventory/AddDevice',
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     }, 
     params: {
       name: req.body.name,
-      description: req.body.description,
       serialNumber: req.body.serialNumber,
+      imei: req.body.imei,
       retailPrice: req.body.retailPrice,
       itemManufacturerId: req.body.itemManufacturerId
     }
   })
   .then(response => {
-    res.redirect('/accessories');
-  })
-  .catch(error => {
-    console.log(error);
-  });
-});
-
-// Edit an accessory
-
-
-// Delete an accessory
-router.post('/delete', function (req, res, next) {
-  axios({
-    url: api + '/Inventory/DeleteAccessory',
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    }, 
-    params: {
-      id: req.body.id
-    }
-  })
-  .then(response => {
-    console.log(response.data);
-    res.redirect('/accessories');
+    res.redirect('/phones');
   })
   .catch(error => {
     console.log(error);
