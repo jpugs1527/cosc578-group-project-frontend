@@ -11,8 +11,9 @@ const jwtDecode = require('jwt-decode');
 // Tell app.js where to get the user routes
 const indexController = require('./controllers/indexController');
 const userController = require('./controllers/userController');
-const accessoryController = require('./controllers/accessoriesController');
+const servicesController = require('./controllers/servicesController');
 const phonesController = require('./controllers/phonesController');
+const accessoryController = require('./controllers/accessoriesController');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -65,8 +66,9 @@ app.use(function(req, res, next){
 
 app.use('/', indexController);
 app.use('/user', userController);
-app.use('/accessories', accessoryController);
+app.use('/services', servicesController);
 app.use('/phones', phonesController);
+app.use('/accessories', accessoryController);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
