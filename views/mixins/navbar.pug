@@ -15,7 +15,7 @@ mixin navbar()
           a.nav-link(href='/phones') Phones
         li.nav-item
           a.nav-link(href='/accessories') Accessories
-        if !data
+        if !user
           li.nav-item.dropdown
             a#navbarDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
               | Account
@@ -25,7 +25,7 @@ mixin navbar()
         else 
           li.nav-item.dropdown
             a#navbarDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
-              | Hi #{data.unique_name}
+              | Hi #{user.FirstName}
             .dropdown-menu(aria-labelledby='navbarDropdown')
               a.dropdown-item(href='/user/logout') Logout
       //- form.form-inline.my-2.my-lg-0

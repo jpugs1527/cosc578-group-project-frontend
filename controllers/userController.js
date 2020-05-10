@@ -3,7 +3,6 @@ const axios = require("axios");
 const router = express.Router();
 require('dotenv').config();
 const api = process.env.SERVER_ADDRESS;
-const jwtDecode = require('jwt-decode');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -18,7 +17,6 @@ router.get('/register', function (req, res, next) {
 // Handle creating new account
 router.post('/register', function (req, res, next) {
   var usrObj = req.body;
-  console.log(usrObj);
   axios({
       url: api + '/Account/Registration',
       method: "POST",
@@ -28,7 +26,6 @@ router.post('/register', function (req, res, next) {
       data: usrObj
     })
     .then(response => {
-      console.log(response.data);
       req.flash('success', 'Account created.  Please login to continue.');
       res.redirect('/user/login');
     })
@@ -47,7 +44,6 @@ router.get('/login', function (req, res, next) {
 // Handle user login
 router.post('/login', function (req, res, next) {
   var usrObj = req.body;
-  console.log(usrObj);
   axios({
       url: api + '/Account/Login',
       method: "POST",
@@ -57,17 +53,24 @@ router.post('/login', function (req, res, next) {
       data: usrObj
     })
     .then(response => {
-      console.log(response.data);
       res.cookie('user', response.data, {
         maxAge: 60000
       });
-      res.render('index', { data: jwtDecode(response.data) });
+      res.redirect('/');
     })
     .catch(error => {
       console.log(error);
       req.flash('error', 'Username or password incorrect.  Try again.');
       res.render('user/login');
     });
+});
+
+router.get("/logout", function (req, res, next) {
+  res.cookie('user', {
+    expires: Date.now(),
+    expired: true
+  });
+  res.redirect('/user/login');
 });
 
 module.exports = router;

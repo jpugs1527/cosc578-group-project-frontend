@@ -4,10 +4,6 @@ const router = express.Router();
 
 /* GET index page. */
 router.get('/', function (req, res, next) {
-  var currUser;
-  if (req.cookies.user) {
-    console.log("User : " + req.cookies.user);
-  }
   res.render("index");
 });
 

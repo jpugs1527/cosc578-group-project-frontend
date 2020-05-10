@@ -6,6 +6,7 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const flash = require('connect-flash');
+const jwtDecode = require('jwt-decode');
 
 // Tell app.js where to get the user routes
 const indexController = require('./controllers/indexController');
@@ -28,6 +29,16 @@ app.use(session({
 
 // Used to deal with cookies from the browser
 app.use(cookieParser());
+
+// Make user cookie available on all routes
+app.use(function(req,res,next){
+    if (req.cookies) {
+        if (req.cookies.user && !req.cookies.user.expired) {
+            res.locals.user = jwtDecode(req.cookies.user);
+        }
+    }
+    next();
+})
 
 // Clear cookie session for logged in user
 app.use((req, res, next) => {
