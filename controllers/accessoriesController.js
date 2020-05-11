@@ -84,7 +84,6 @@ router.post('/delete', function (req, res, next) {
       }
     })
     .then(response => {
-      console.log(response.data);
       res.redirect('/accessories');
     })
     .catch(error => {

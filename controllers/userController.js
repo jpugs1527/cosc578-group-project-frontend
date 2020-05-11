@@ -78,7 +78,6 @@ router.get("/logout", function (req, res, next) {
 // Route to edit a users role
 router.post("/editRole", function (req, res, next) {
   var usrObj = req.body;
-  console.log(usrObj);
   var token;
   if (req.cookies.user) {
     token = req.cookies.user;

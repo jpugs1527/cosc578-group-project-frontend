@@ -28,10 +28,7 @@ block content
                 else 
                   td
                 td
-                  .row
-                    button.mr-1(class='btn btn-secondary' type='button', data-toggle='modal', data-target='#editUserModal' + index) Edit 
-                    form(action='/user/delete', method='post')
-                      button(class='btn btn-danger' type='submit', name='id', value=val.Id) X
+                  button.mr-1(class='btn btn-secondary' type='button', data-toggle='modal', data-target='#editUserModal' + index) Edit Role
                   .modal.fade(id="editUserModal"+index, tabindex='-1', role='dialog', aria-hidden='true' )
                     .modal-dialog(role='document')
                       .modal-content
