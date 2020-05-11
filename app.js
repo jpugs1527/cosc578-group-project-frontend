@@ -15,6 +15,7 @@ const servicesController = require("./controllers/servicesController");
 const phonesController = require("./controllers/phonesController");
 const accessoryController = require("./controllers/accessoriesController");
 const adminController = require("./controllers/adminController");
+const storeController = require("./controllers/storesController");
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
@@ -75,6 +76,7 @@ app.use("/services", servicesController);
 app.use("/phones", phonesController);
 app.use("/accessories", accessoryController);
 app.use("/admin", adminController);
+app.use("/store", storeController);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

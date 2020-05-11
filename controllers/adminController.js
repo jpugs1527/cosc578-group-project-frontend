@@ -11,10 +11,11 @@ router.get("/", function (req, res, next) {
     token = req.cookies.user;
     axios.all([
       axios.get(api + '/Account/GetAccounts', { headers: { "Authorization": `Bearer ${token}`, "Content-Type": "application/json" }}),
-      // axios.get(api + '/Inventory/GetStores', { headers: {  "Authorization": `Bearer ${token}`, "Content-Type": "application/json" }})
+      axios.get(api + '/Inventory/GetStores', { headers: { "Authorization": `Bearer ${token}`, "Content-Type": "application/json" }})
     ])
-    .then(axios.spread((usersRes) => {
-      res.render("admin/index", {users: usersRes.data});
+    .then(axios.spread((usersRes, storesRes) => {
+      console.log(storesRes.data);
+      res.render("admin/index", {users: usersRes.data, stores: storesRes.data});
     }))
     .catch(err => {
       console.log(err);

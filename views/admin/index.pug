@@ -28,7 +28,7 @@ block content
                 else 
                   td
                 td
-                  button.mr-1(class='btn btn-secondary' type='button', data-toggle='modal', data-target='#editUserModal' + index) Edit Role
+                  button(class='btn btn-secondary' type='button', data-toggle='modal', data-target='#editUserModal' + index) Edit Role
                   .modal.fade(id="editUserModal"+index, tabindex='-1', role='dialog', aria-hidden='true' )
                     .modal-dialog(role='document')
                       .modal-content
@@ -50,9 +50,39 @@ block content
                                 option(value="3") Employee
                                 option(value="4") Guest 
                             button.btn.btn-primary.float-right(type='submit') Save
-            div
-              a.float-right(href="/user/register" class="btn btn-primary") Add User
-      #stores.tab-pane.fade(role='tabpanel', aria-labelledby='stores-tab') ...
+            a.float-right(href="/user/register" class="btn btn-primary") Add User
+      #stores.tab-pane.fade(role='tabpanel', aria-labelledby='stores-tab')
+        table.table(cellspacing='0')
+          thead
+            tr
+              th(scope="col") Store ID
+              th(scope="col") Store Name
+              th(scope="col") Percentage
+          tbody
+            for val, index in stores
+              tr
+                td=val.StoreId
+                td=val.StoreName
+                td=val.StorePercentage
 
-
+            button.float-right(class='btn btn-primary' type='button', data-toggle='modal', data-target='#addStoreModal') Add Store
+            .modal.fade(id="addStoreModal", tabindex='-1', role='dialog', aria-hidden='true' )
+              .modal-dialog(role='document')
+                .modal-content
+                  .modal-header
+                    h5.modal-title Add Store
+                    button.close(type='button', data-dismiss='modal', aria-label='Close') 
+                    span(aria-hidden='true') &times;
+                  .modal-body
+                    form(action="/user/editRole", method="post")
+                      .form-group
+                        label(for="storeId") Store ID
+                        input.form-control(type='text' name='storeId' placeholder="Store ID")
+                      .form-group
+                        label(for="storeName") Store Name
+                        input.form-control(type='text' name='storeName' placeholder="Store Name")
+                      .form-group
+                        label(for="storePercentage") Store Percentage
+                        input.form-control(type='text' name='storePercentage' placeholder="Store Percentage")
+                      button.btn.btn-primary.float-right(type='submit') Save
 
