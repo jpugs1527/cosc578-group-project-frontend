@@ -2,22 +2,33 @@ const express = require("express");
 const axios = require("axios");
 const router = express.Router();
 const api = process.env.SERVER_ADDRESS;
+const jwtDecode = require("jwt-decode");
 
 /* GET index page. */
 router.get('/', function (req, res, next) {
-  axios({
-    url: api + '/Inventory/GetDevices',
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json"
-    }, 
-  })
-  .then(response => {
-    res.render('phones/index', { data: response.data });
-  })
-  .catch(error => {
-    console.log(error);
-  });
+  var token;
+  if (req.cookies.user) {
+    token = req.cookies.user;
+    axios({
+      url: api + '/Inventory/GetDevices',
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }, 
+    })
+    .then(response => {
+      res.render('phones/index', { data: response.data });
+    })
+    .catch(error => {
+      console.log(error);
+      if (error.response.status == 401) {
+        res.redirect("user/login");
+      }
+    });
+  } else {
+    res.redirect("/user/login");
+  }
 });
 
 // Add a new device

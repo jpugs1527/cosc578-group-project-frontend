@@ -11,23 +11,27 @@ mixin navbar()
             span.sr-only (current)
         //- li.nav-item
         //-   a.nav-link(href='/services') Services
-        li.nav-item
-          a.nav-link(href='/phones') Phones
-        li.nav-item
-          a.nav-link(href='/accessories') Accessories
+        if user
+          li.nav-item
+            a.nav-link(href='/phones') Phones
+        if user
+          li.nav-item
+            a.nav-link(href='/accessories') Accessories
         if !user
-          li.nav-item.dropdown
-            a#navbarDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
-              | Account
-            .dropdown-menu(aria-labelledby='navbarDropdown')
-              a.dropdown-item(href='/user/register') Register
-              a.dropdown-item(href='/user/login') Login
+          li.nav-item
+            a.nav-link(href='/user/login') Login
+          //- li.nav-item.dropdown
+            //- a#navbarDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+            //-   | Account
+            //- .dropdown-menu(aria-labelledby='navbarDropdown')
+            //-   a.dropdown-item(href='/user/register') Register
+            //-   a.dropdown-item(href='/user/login') Login
         else 
           li.nav-item.dropdown
             a#navbarDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
               | Hi #{user.FirstName}
             .dropdown-menu(aria-labelledby='navbarDropdown')
-              if user.unique_name == "jpugli1"
+              if user.role == "Admin"
                 a.dropdown-item(href='/admin') Admin
               a.dropdown-item(href='/user/logout') Logout
       //- form.form-inline.my-2.my-lg-0

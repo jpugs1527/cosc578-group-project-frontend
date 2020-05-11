@@ -1,76 +1,78 @@
 const express = require("express");
 const axios = require("axios");
 const router = express.Router();
-require('dotenv').config();
+require("dotenv").config();
 const api = process.env.SERVER_ADDRESS;
+const jwtDecode = require("jwt-decode");
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get("/", function (req, res, next) {
   res.send("Hello user");
 });
 
 // Return registration form
-router.get('/register', function (req, res, next) {
-  res.render('user/register');
+router.get("/register", function (req, res, next) {
+  res.render("user/register");
 });
 
 // Handle creating new account
-router.post('/register', function (req, res, next) {
+router.post("/register", function (req, res, next) {
   var usrObj = req.body;
   axios({
-      url: api + '/Account/Registration',
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      data: usrObj
+    url: api + "/Account/Registration",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: usrObj,
+  })
+    .then((response) => {
+      req.flash("success", "Account created.  Please login to continue.");
+      res.redirect("/user/login");
     })
-    .then(response => {
-      req.flash('success', 'Account created.  Please login to continue.');
-      res.redirect('/user/login');
-    })
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
-      req.flash('error', 'Oops something went wrong... Try again later');
-      res.redirect('/user/register');
+      req.flash("error", "Oops something went wrong... Try again later");
+      res.redirect("/user/register");
     });
 });
 
 // Return login form
-router.get('/login', function (req, res, next) {
-  res.render('user/login');
+router.get("/login", function (req, res, next) {
+  res.render("user/login");
 });
 
 // Handle user login
-router.post('/login', function (req, res, next) {
+router.post("/login", function (req, res, next) {
   var usrObj = req.body;
   axios({
-      url: api + '/Account/Login',
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      }, 
-      data: usrObj
-    })
-    .then(response => {
-      res.cookie('user', response.data, {
-        maxAge: 1800000
+    url: api + "/Account/Login",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: usrObj,
+  })
+    .then((response) => {
+      res.cookie("user", response.data, {
+        maxAge: 1800000,
       });
-      res.redirect('/');
+      res.redirect("/");
     })
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
-      req.flash('error', 'Username or password incorrect.  Try again.');
-      res.render('user/login');
+      req.flash("error", "Username or password incorrect.  Try again.");
+      res.render("user/login");
     });
 });
 
+// Route to force expire user cookie
 router.get("/logout", function (req, res, next) {
-  res.cookie('user', {
+  res.cookie("user", {
     expires: Date.now(),
-    expired: true
+    expired: true,
   });
-  res.redirect('/user/login');
+  res.redirect("/user/login");
 });
 
 module.exports = router;

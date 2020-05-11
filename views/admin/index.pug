@@ -1,0 +1,33 @@
+extends ../layout
+
+block content
+  div.col-md-10.mx-auto
+    ul#adminTab.nav.nav-tabs(role='tablist')
+      li.nav-item
+        a#users-tab.nav-link.active(data-toggle='tab', href='#users', role='tab', aria-controls='users', aria-selected='true') Users
+      li.nav-item
+        a#stores-tab.nav-link(data-toggle='tab', href='#stores', role='tab', aria-controls='stores', aria-selected='false') Stores
+    #adminTabContent.tab-content
+      #users.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='users-tab')
+        table.table(cellspacing='0')
+          thead
+            tr
+              th Username
+              th First Name
+              th Last Name
+              th Role
+              th 
+          tbody
+            for val, index in users
+              tr
+                td=val.Username
+                td=val.FirstName
+                td=val.LastName
+                td=val.Role
+                td
+                  
+              
+      #stores.tab-pane.fade(role='tabpanel', aria-labelledby='stores-tab') ...
+
+
+

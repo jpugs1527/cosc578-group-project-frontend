@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+  .container(class="col-md-8")
+    form(action="/admin/editUserRole", method="post")
+      .form-group
+        label(for='username') Username
+        input.form-control(type='text' name='username' placeholder='Username')
+      .form-group
+        label(for='firstName') First Name
+        input.form-control(type='text' name='firstName' placeholder='First Name')
+      .form-group
+        label(for='lastName') Last Name
+        input.form-control(type='text' name='lastName' placeholder='Last Name')
+      .form-group
+        label(for='lastName') Last Name
+        input.form-control(type='text' name='lastName' placeholder='Last Name')
+      button.btn.btn-primary(type='submit') Submit
