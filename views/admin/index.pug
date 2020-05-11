@@ -12,11 +12,11 @@ block content
         table.table(cellspacing='0')
           thead
             tr
-              th Username
-              th First Name
-              th Last Name
-              th Role
-              th 
+              th(scope="col") Username
+              th(scope="col") First Name
+              th(scope="col") Last Name
+              th(scope="col") Role
+              th(scope="col") 
           tbody
             for val, index in users
               tr
@@ -25,9 +25,36 @@ block content
                 td=val.LastName
                 if val.Roles[0]
                   td=val.Roles[0].RoleName
+                else 
+                  td
                 td
-                  
-              
+                  .row
+                    button.mr-1(class='btn btn-secondary' type='button', data-toggle='modal', data-target='#editUserModal' + index) Edit 
+                    form(action='/user/delete', method='post')
+                      button(class='btn btn-danger' type='submit', name='id', value=val.Id) X
+                  .modal.fade(id="editUserModal"+index, tabindex='-1', role='dialog', aria-hidden='true' )
+                    .modal-dialog(role='document')
+                      .modal-content
+                        .modal-header
+                          h5.modal-title Editing role for #{users[index].FirstName} #{users[index].LastName}
+                          button.close(type='button', data-dismiss='modal', aria-label='Close') 
+                          span(aria-hidden='true') &times;
+                        .modal-body
+                          h6 Current Role: #{users[index].Roles[0] ? users[index].Roles[0].RoleName : "N/A"}
+                          form(action="/user/editRole", method="post")
+                            .form-group
+                              input.form-control(type='hidden' name='username' value=users[index].Username)
+                            .form-group
+                              label(for='roles') Change To:
+                              select#role.form-control(name="roles[]")
+                                option(value="")
+                                option(value="1") Admin
+                                option(value="2") Manager
+                                option(value="3") Employee
+                                option(value="4") Guest 
+                            button.btn.btn-primary.float-right(type='submit') Save
+            div
+              a.float-right(href="/user/register" class="btn btn-primary") Add User
       #stores.tab-pane.fade(role='tabpanel', aria-labelledby='stores-tab') ...
 
 

@@ -2,6 +2,8 @@ extends ../layout
 
 block content
   div.col-md-6.mx-auto
+    h4 Create New User
+    hr
     if error && error.length > 0
       .alert.alert-danger.alert-dismissible.fade-in(role="alert")
         button.close(type="button" data-dismiss="alert" aria-label="Close")

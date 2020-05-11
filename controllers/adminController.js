@@ -14,11 +14,6 @@ router.get("/", function (req, res, next) {
       // axios.get(api + '/Inventory/GetStores', { headers: {  "Authorization": `Bearer ${token}`, "Content-Type": "application/json" }})
     ])
     .then(axios.spread((usersRes) => {
-      usersRes.data.forEach(user => {
-        if (user.IsActive && user.Roles[0]) {
-          console.log(user.Roles[0].RoleName);
-        }
-      });
       res.render("admin/index", {users: usersRes.data});
     }))
     .catch(err => {

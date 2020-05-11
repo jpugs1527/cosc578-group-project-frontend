@@ -75,4 +75,34 @@ router.get("/logout", function (req, res, next) {
   res.redirect("/user/login");
 });
 
+// Route to edit a users role
+router.post("/editRole", function (req, res, next) {
+  var usrObj = req.body;
+  console.log(usrObj);
+  var token;
+  if (req.cookies.user) {
+    token = req.cookies.user;
+    axios({
+      url: api + "/Admin/SetAccountRolesByUsername",
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      data: usrObj,
+    })
+    .then((response) => {
+      res.redirect("/admin");
+    })
+    .catch((error) => {
+      console.log(error);
+      if (error.response.status == 401) {
+        res.render("user/login");
+      }
+    });
+  } else {
+    res.render("user/login");
+  }
+});
+
 module.exports = router;
