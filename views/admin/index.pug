@@ -23,7 +23,8 @@ block content
                 td=val.Username
                 td=val.FirstName
                 td=val.LastName
-                td=val.Role
+                if val.Roles[0]
+                  td=val.Roles[0].RoleName
                 td
                   
               
