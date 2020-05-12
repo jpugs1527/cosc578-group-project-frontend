@@ -49,7 +49,7 @@ router.post("/add", function (req, res, next) {
       },
     })
     .then((response) => {
-      if (req.body.store != null) {
+      if (req.body.store != '') {
         axios.all([
           axios.get(api + '/Inventory/GetStores', { headers: { "Authorization": `Bearer ${token}`, "Content-Type": "application/json" }}),
           axios.get(api + '/Inventory/GetItemManufacturer', { headers: { "Authorization": `Bearer ${token}`, "Content-Type": "application/json" }}),
