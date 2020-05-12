@@ -42,7 +42,7 @@ app.use(function (req, res, next) {
     if (req.cookies.user && !req.cookies.user.expired) {
       res.locals.user = jwtDecode(req.cookies.user);
     } else {
-      res.locals.user = { role: "Guest" }
+      res.locals.user = { role: "Unauth" }
     }
   }
   next();

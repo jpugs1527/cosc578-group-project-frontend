@@ -1,17 +1,18 @@
 extends ../layout
 
 block content
-    .container(class="col-md-4")
-        form(action="/accessories/filter", method="POST")
-        .form-group
-            label(for="storeId") Showing results for: 
-            .input-group
-                select.form-control.mr-1(name="storeId")
-                    if stores
-                    option(value="") -- Select Store --
-                    for val, index in stores
-                        option(value=val.StoreId selected = val.StoreId==currStore ? true : false) #{val.StoreName}
-                button.btn.btn-primary(type="submit") Filter
+    if user.role != "Unauth"
+        .container(class="col-md-4")
+            form(action="/accessories/filter", method="POST")
+                .form-group
+                    label(for="storeId") Showing results for: 
+                    .input-group
+                        select.form-control.mr-1(name="storeId")
+                            if stores
+                            option(value="") -- Select Store --
+                            for val, index in stores
+                                option(value=val.StoreId selected = val.StoreId==currStore ? true : false) #{val.StoreName}
+                        button.btn.btn-primary(type="submit") Filter
     .container(class="col-md-8")
         table.table
             thead
@@ -50,19 +51,19 @@ block content
                         form(action="/accessories/add", method="post")
                             .form-group
                                 label(for='name') Name
-                                input.form-control(type='text' name='name' placeholder='Name')
+                                input.form-control(type='text' name='name' placeholder='Name' required)
                             .form-group
                                 label(for='description') Description
-                                input.form-control(type='text' name='description' placeholder='Description')
+                                input.form-control(type='text' name='description' placeholder='Description' required)
                             .form-group
                                 label(for='serialNumber') Serial Number
-                                input.form-control(type='number' name='serialNumber' placeholder='Serial Number')
+                                input.form-control(type='number' name='serialNumber' placeholder='Serial Number' required)
                             .form-group
                                 label(for='retailPrice') Retail Price
-                                input.form-control(type='number' step=".01" name='retailPrice' placeholder='Retail Price')
+                                input.form-control(type='number' step=".01" name='retailPrice' placeholder='Retail Price' required)
                             .form-group
                                 label(for='itemManufacturerId') Manufacturer
-                                select#itemManufacturerId.form-control(name="itemManufacturerId")
+                                select#itemManufacturerId.form-control(name="itemManufacturerId" required)
                                     each man, index in manufacturers
                                         option(value=man.Id) #{man.Manufacturer}
                             button.btn.btn-primary.float-right(type='submit') Submit
