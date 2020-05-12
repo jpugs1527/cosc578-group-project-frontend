@@ -19,11 +19,11 @@ router.get("/", function (req, res, next) {
     .catch(err => {
       console.log(err);
       if (err.response.status == 401) {
-        res.redirect("user/login");
+        res.redirect("/user/login");
       }
     });
   } else {
-    res.render("user/login");
+    res.render("/user/login");
   }
 });
 

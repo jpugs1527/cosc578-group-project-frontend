@@ -11,26 +11,26 @@ router.post("/add", function (req, res, next) {
   if (req.cookies.user) {
     token = req.cookies.user;
     axios({
-      url: api + '/Admin/AddStore',
+      url: api + "/Admin/AddStore",
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json"
-      }, 
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
       params: {
         storeName: storeObj.storeName,
-        storePercentage: storeObj.storePercentage
-      }
+        storePercentage: storeObj.storePercentage,
+      },
     })
-    .then(response => {
-      res.redirect('/admin');
-    })
-    .catch(error => {
-      console.log(error);
-      if (error.response.status == 401) {
-        res.redirect("user/login");
-      }
-    });
+      .then((response) => {
+        res.redirect("/admin");
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response.status == 401) {
+          res.redirect("/user/login");
+        }
+      });
   } else {
     res.redirect("/user/login");
   }
