@@ -66,6 +66,8 @@ block content
                                 select#itemManufacturerId.form-control(name="itemManufacturerId" required)
                                     each man, index in manufacturers
                                         option(value=man.Id) #{man.Manufacturer}
+                            .form-group
+                                input(type="hidden" name="store" value=currStore ? currStore : null)
                             button.btn.btn-primary.float-right(type='submit') Submit
 
                 
