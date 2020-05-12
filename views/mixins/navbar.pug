@@ -11,13 +11,11 @@ mixin navbar()
             span.sr-only (current)
         //- li.nav-item
         //-   a.nav-link(href='/services') Services
-        if user
-          li.nav-item
-            a.nav-link(href='/phones') Phones
-        if user
-          li.nav-item
-            a.nav-link(href='/accessories') Accessories
-        if !user
+        li.nav-item
+          a.nav-link(href='/phones') Phones
+        li.nav-item
+          a.nav-link(href='/accessories') Accessories
+        if !user.FirstName
           li.nav-item
             a.nav-link(href='/user/login') Login
           //- li.nav-item.dropdown
