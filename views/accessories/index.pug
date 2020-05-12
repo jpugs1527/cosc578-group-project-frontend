@@ -1,6 +1,17 @@
 extends ../layout
 
 block content
+    .container(class="col-md-4")
+        form(action="/accessories/filter", method="POST")
+        .form-group
+            label(for="storeId") Showing results for: 
+            .input-group
+                select.form-control.mr-1(name="storeId")
+                    if stores
+                    option(value="") -- Select Store --
+                    for val, index in stores
+                        option(value=val.StoreId selected = val.StoreId==currStore ? true : false) #{val.StoreName}
+                button.btn.btn-primary(type="submit") Filter
     .container(class="col-md-8")
         table.table
             thead
