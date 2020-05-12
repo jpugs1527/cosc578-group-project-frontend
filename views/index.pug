@@ -7,24 +7,30 @@ block content
     br
     #indexCarousel.carousel.slide(data-ride='carousel')
       .carousel-inner
+        //- .carousel-item.active
+        //-   .card.bg-secondary
+        //-     .card-body.mx-auto
+        //-       h5.card-title Services
+        //-       ul.card-text
+        //-         li Screen Repair
+        //-         li Battery Replacement
+        //-         li Phone Activation
         .carousel-item.active
-          .card.bg-secondary
-            .card-body.mx-auto
-              h5.card-title Services
-              ul.card-text
-                li Screen Repair
-                li Battery Replacement
-                li Phone Activation
-        .carousel-item
-          .card.bg-secondary
+          .card.bg-light
             .card-body.mx-auto
               h5.card-title Phones
               .card-text
                 h6 Time for a new phone? Check out our inventory <a href="/phones">here<a>!
         .carousel-item
-          .card.bg-secondary
+          .card.bg-light
             .card-body.mx-auto
               h5.card-title Accessories
+              .card-text
+                ul 
+                 li Cases
+                 li Chargers
+                 li Screen Protectors
+                 li And many <a href="/accessories"> more! </a>
       a.carousel-control-prev(href='#indexCarousel' role='button' data-slide='prev')
         span.carousel-control-prev-icon(aria-hidden='true')
         span.sr-only Previous

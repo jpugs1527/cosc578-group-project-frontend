@@ -74,10 +74,7 @@ block content
                     button.close(type='button', data-dismiss='modal', aria-label='Close') 
                     span(aria-hidden='true') &times;
                   .modal-body
-                    form(action="/user/editRole", method="post")
-                      .form-group
-                        label(for="storeId") Store ID
-                        input.form-control(type='text' name='storeId' placeholder="Store ID")
+                    form(action="/store/add", method="post")
                       .form-group
                         label(for="storeName") Store Name
                         input.form-control(type='text' name='storeName' placeholder="Store Name")
