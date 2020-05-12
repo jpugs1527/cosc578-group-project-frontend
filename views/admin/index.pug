@@ -7,6 +7,8 @@ block content
         a#users-tab.nav-link.active(data-toggle='tab', href='#users', role='tab', aria-controls='users', aria-selected='true') Users
       li.nav-item
         a#stores-tab.nav-link(data-toggle='tab', href='#stores', role='tab', aria-controls='stores', aria-selected='false') Stores
+      li.nav-item
+        a#ednpoints-tab.nav-link(data-toggle='tab', href='#endpoints', role='tab', aria-controls='endpoints', aria-selected='false') Endpoints
     #adminTabContent.tab-content
       #users.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='users-tab')
         table.table(cellspacing='0')
@@ -82,4 +84,26 @@ block content
                         label(for="storePercentage") Store Percentage
                         input.form-control(type='text' name='storePercentage' placeholder="Store Percentage")
                       button.btn.btn-primary.float-right(type='submit') Save
+      #endpoints.tab-pane.fade(role='tabpanel', aria-labelledby='endpoints-tab')
+      table.table(cellspacing='0')
+        thead
+          tr
+            th(scope="col") Resource ID
+            th(scope="col") Resource Name
+            th(scope="col") Description
+            th(scope="col") Roles
+        tbody
+          for val, index in endpoints
+            tr
+              td=val.ResourceId
+              td=val.ResourceName
+              td=val.Description
+              if val.Roles
+                td
+                  each role in val.Roles
+                    ul
+                      li #{role.RoleName}
+              else 
+                td
+                  p N/A
 

@@ -9,7 +9,8 @@ block content
                 th(scope='col') Description
                 th(scope='col') Serial Number
                 th(scope='col') Retail Price
-                th(scope='col') Manufacturer ID
+                th(scope='col') Purchase Price
+                th(scope='col') Manufacturer
                 th(scope='col')
             tbody
             each val, index in data
@@ -18,7 +19,8 @@ block content
                     td=val.Description
                     td=val.SerialNumber
                     td="$" + val.RetailPrice
-                    td=val.ItemManufacturerId
+                    td="$" + val.PurchasePrice
+                    td=val.ItemManufacturerName
                     td 
                         if user.role == "Admin" || user.role == "Manager"
                             form(action='/accessories/delete', method='post')
@@ -48,8 +50,10 @@ block content
                                 label(for='retailPrice') Retail Price
                                 input.form-control(type='number' step=".01" name='retailPrice' placeholder='Retail Price')
                             .form-group
-                                label(for='itemManufacturerId') Manufacturer ID
-                                input.form-control(type='number' name='itemManufacturerId' placeholder='Manufacturer ID')
+                                label(for='itemManufacturerId') Manufacturer
+                                select#itemManufacturerId.form-control(name="itemManufacturerId")
+                                    each man, index in manufacturers
+                                        option(value=man.Id) #{man.Manufacturer}
                             button.btn.btn-primary.float-right(type='submit') Submit
 
                 

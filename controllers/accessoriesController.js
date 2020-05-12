@@ -8,25 +8,21 @@ router.get("/", function (req, res, next) {
   var token;
   if (req.cookies.user) {
     token = req.cookies.user;
-    axios({
-      url: api + "/Inventory/GetAccessories",
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        res.render("accessories/index", { data: response.data });
-      })
-      .catch((error) => {
-        console.log(error);
-        if (error.response.status == 401) {
-          res.send("Unauthorized");
-        }
-      });
+    axios.all([
+      axios.get(api + '/Inventory/GetAccessories', { headers: { "Authorization": `Bearer ${token}`, "Content-Type": "application/json" }}),
+      axios.get(api + '/Inventory/GetItemManufacturer', { headers: { "Authorization": `Bearer ${token}`, "Content-Type": "application/json" }})
+    ])
+    .then(axios.spread((accessoriesRes, manufacturersRes) => {
+      res.render("accessories/index", {data: accessoriesRes.data, manufacturers: manufacturersRes.data});
+    }))
+    .catch(err => {
+      console.log(err);
+      if (err.response.status == 401) {
+        res.send("Unauthorized");
+      }
+    });
   } else {
-    res.redirect("/user/login");
+    res.render("/user/login");
   }
 });
 
