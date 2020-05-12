@@ -6,7 +6,7 @@ const api = process.env.SERVER_ADDRESS;
 /* GET index page. */
 router.get("/", function (req, res, next) {
   var token;
-  if (req.cookies.user) {
+  if (req.cookies.user || res.locals.user) {
     token = req.cookies.user;
     axios.all([
       axios.get(api + '/Inventory/GetAccessories', { headers: { "Authorization": `Bearer ${token}`, "Content-Type": "application/json" }}),
