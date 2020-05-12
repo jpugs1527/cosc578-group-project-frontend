@@ -9,7 +9,7 @@ block content
         th(scope='col') Serial Number
         th(scope='col') IMEI
         th(scope='col') Retail Price
-        th(scope='col') Manufacturer ID
+        th(scope='col') Manufacturer
         th(scope='col')
       tbody
       each val, index in data
@@ -18,7 +18,7 @@ block content
           td=val.SerialNumber
           td=val.IMEI
           td="$" + val.RetailPrice
-          td=val.ItemManufacturerId
+          td=val.ItemManufacturerName
           td 
             if user.role == "Admin" || user.role == "Manager"
               form(action='/phones/delete', method='post')
