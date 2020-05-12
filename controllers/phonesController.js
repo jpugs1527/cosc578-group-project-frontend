@@ -50,7 +50,37 @@ router.post("/add", function (req, res, next) {
       },
     })
     .then(response => {
-      res.redirect('/phones');
+      if (req.body.store != '') {
+        axios.all([
+          axios.get(api + '/Inventory/GetStores', { headers: { "Authorization": `Bearer ${token}`, "Content-Type": "application/json" }}),
+          axios.get(api + '/Inventory/GetItemManufacturer', { headers: { "Authorization": `Bearer ${token}`, "Content-Type": "application/json" }}),
+          axios.get(api + '/Inventory/GetStoreInventory', 
+            { headers: { 
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json" 
+              },
+              params: {
+                storeId: req.body.store 
+              }
+            })
+        ])
+        .then(axios.spread((storesRes, manufacturersRes, inventoryRes) => {
+          if (inventoryRes.data.Items) {
+            storeInventory = inventoryRes.data.Items.Devices
+          } else {
+            storeInventory = [];
+          }
+          res.render("phones/index", {stores: storesRes.data, manufacturers: manufacturersRes.data, data: storeInventory, currStore: req.body.store});
+        }))
+        .catch(err => {
+          console.log(err);
+          if (err.response.status == 401) {
+            res.redirect("Unauthorized");
+          }
+        });
+      } else {
+        res.redirect('/phones');
+      }
     })
     .catch(error => {
       console.log(error);
