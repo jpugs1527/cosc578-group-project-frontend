@@ -31,7 +31,7 @@ block content
                     td=val.Description
                     td=val.SerialNumber
                     td="$" + val.RetailPrice
-                    td="$" + val.PurchasePrice
+                    td $#{val.PurchasePrice ? val.PurchasePrice : val.RetailPrice}
                     td=val.ItemManufacturerName
                     td 
                         if user.role == "Admin" || user.role == "Manager"
