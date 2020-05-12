@@ -9,11 +9,12 @@ block content
                     .input-group
                         select.form-control.mr-1(name="storeId")
                             if stores
-                            option(value=null) -- Select Store --
+                            option(value="0") -- Select Store --
                             for val, index in stores
                                 option(value=val.StoreId selected = val.StoreId==currStore ? true : false) #{val.StoreName}
                         button.btn.btn-primary(type="submit") Filter
     .container(class="col-md-8")
+        h4 Accessories
         table.table
             thead
             tr
