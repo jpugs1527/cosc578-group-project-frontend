@@ -85,25 +85,25 @@ block content
                         input.form-control(type='text' name='storePercentage' placeholder="Store Percentage")
                       button.btn.btn-primary.float-right(type='submit') Save
       #endpoints.tab-pane.fade(role='tabpanel', aria-labelledby='endpoints-tab')
-      table.table(cellspacing='0')
-        thead
-          tr
-            th(scope="col") Resource ID
-            th(scope="col") Resource Name
-            th(scope="col") Description
-            th(scope="col") Roles
-        tbody
-          for val, index in endpoints
+        table.table(cellspacing='0')
+          thead
             tr
-              td=val.ResourceId
-              td=val.ResourceName
-              td=val.Description
-              if val.Roles
-                td
-                  each role in val.Roles
-                    ul
-                      li #{role.RoleName}
-              else 
-                td
-                  p N/A
+              th(scope="col") Resource ID
+              th(scope="col") Resource Name
+              th(scope="col") Description
+              th(scope="col") Roles
+          tbody
+            for val, index in endpoints
+              tr
+                td=val.ResourceId
+                td=val.ResourceName
+                td=val.Description
+                if val.Roles
+                  td
+                    each role in val.Roles
+                      ul
+                        li #{role.RoleName}
+                else 
+                  td
+                    p N/A
 

@@ -119,7 +119,6 @@ router.post("/filter", function (req, res, next) {
       } else {
         storeInventory = [];
       }
-      console.log(storesRes.data);
       res.render("accessories/index", {stores: storesRes.data, manufacturers: manufacturersRes.data, data: storeInventory, currStore: req.body.storeId});
     }))
     .catch(err => {

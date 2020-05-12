@@ -53,17 +53,17 @@ router.post("/login", function (req, res, next) {
     },
     data: usrObj,
   })
-    .then((response) => {
-      res.cookie("user", response.data, {
-        maxAge: 1800000,
-      });
-      res.redirect("/");
-    })
-    .catch((error) => {
-      console.log(error);
-      req.flash("error", "Username or password incorrect.  Try again.");
-      res.render("user/login");
+  .then((response) => {
+    res.cookie("user", response.data, {
+      maxAge: 1800000,
     });
+    res.redirect("/");
+  })
+  .catch((error) => {
+    console.log(error);
+    req.flash("error", "Username or password incorrect.  Try again.");
+    res.render("user/login");
+  });
 });
 
 // Route to force expire user cookie
