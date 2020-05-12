@@ -19,7 +19,7 @@ router.get("/", function (req, res, next) {
     .catch(err => {
       console.log(err);
       if (err.response.status == 401) {
-        res.redirect("/user/login");
+        res.send("Unauthorized");
       }
     });
   } else {

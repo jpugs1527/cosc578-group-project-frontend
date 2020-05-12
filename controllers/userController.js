@@ -96,7 +96,7 @@ router.post("/editRole", function (req, res, next) {
     .catch((error) => {
       console.log(error);
       if (error.response.status == 401) {
-        res.render("user/login");
+        res.send("Unauthorized");
       }
     });
   } else {

@@ -22,7 +22,7 @@ router.get("/", function (req, res, next) {
       .catch((error) => {
         console.log(error);
         if (error.response.status == 401) {
-          res.redirect("/user/login");
+          res.send("Unauthorized");
         }
       });
   } else {
@@ -56,7 +56,7 @@ router.post("/add", function (req, res, next) {
       .catch((error) => {
         console.log(error);
         if (error.response.status == 401) {
-          res.redirect("/user/login");
+          res.send("Unauthorized");
         }
       });
   } else {
@@ -88,7 +88,7 @@ router.post("/delete", function (req, res, next) {
       .catch((error) => {
         console.log(error);
         if (error.response.status == 401) {
-          res.redirect("/user/login");
+          res.send("Unauthorized");
         }
       });
   } else {
