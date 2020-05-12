@@ -14,7 +14,6 @@ router.get("/", function (req, res, next) {
       axios.get(api + '/Inventory/GetStores', { headers: { "Authorization": `Bearer ${token}`, "Content-Type": "application/json" }})
     ])
     .then(axios.spread((usersRes, storesRes) => {
-      console.log(storesRes.data);
       res.render("admin/index", {users: usersRes.data, stores: storesRes.data});
     }))
     .catch(err => {

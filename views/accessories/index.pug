@@ -20,12 +20,12 @@ block content
                     td="$" + val.RetailPrice
                     td=val.ItemManufacturerId
                     td 
-                        //- form(action='/accessories/delete', method='post')
-                        //-     button(class='btn btn-danger' type='submit', name='id', value=val.Id) 
-                        form(action='/accessories/delete', method='post')
-                            button(class='btn btn-danger' type='submit', name='id', value=val.Id) X
-        button.btn.btn-primary.float-right(type='button', data-toggle='modal', data-target='#accessoryModal')
-            | Add
+                        if user.role == "Admin" || user.role == "Manager"
+                            form(action='/accessories/delete', method='post')
+                                button(class='btn btn-danger' type='submit', name='id', value=val.Id) X
+        if user.role == "Admin" || user.role == "Manager" || user.role == "Employee"
+            button.btn.btn-primary.float-right(type='button', data-toggle='modal', data-target='#accessoryModal')
+                | Add
         #accessoryModal.modal.fade(tabindex='-1', role='dialog', aria-hidden='true')
             .modal-dialog(role='document')
                 .modal-content
